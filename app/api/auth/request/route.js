@@ -1,6 +1,6 @@
 const { NextResponse } = require("next/server");
 const { prisma } = require("../../../../lib/db");
-const { makeLoginToken } = require("../../../../lib/auth");
+const { makeLoginToken, getRequestOrigin } = require("../../../../lib/auth");
 const { sendMagicLink } = require("../../../../lib/mail");
 
 async function POST(req) {
@@ -28,7 +28,7 @@ async function POST(req) {
     data: { email: cleanEmail, token, expiresAt },
   });
 
-  const origin = req.headers.get("origin") || process.env.APP_URL;
+  const origin = getRequestOrigin(req);
   const link = `${origin}/api/auth/verify?token=${token}`;
 
   await sendMagicLink(cleanEmail, link);

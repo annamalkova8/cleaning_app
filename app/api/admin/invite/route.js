@@ -1,6 +1,6 @@
 const { NextResponse } = require("next/server");
 const { prisma } = require("../../../../lib/db");
-const { getSession, makeLoginToken } = require("../../../../lib/auth");
+const { getSession, makeLoginToken, getRequestOrigin } = require("../../../../lib/auth");
 const { sendInviteEmail } = require("../../../../lib/mail");
 
 async function POST(req) {
@@ -25,7 +25,7 @@ async function POST(req) {
   const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
   await prisma.loginToken.create({ data: { email: cleanEmail, token, expiresAt } });
 
-  const origin = req.headers.get("origin") || process.env.APP_URL;
+  const origin = getRequestOrigin(req);
   const link = `${origin}/api/auth/verify?token=${token}`;
   await sendInviteEmail(cleanEmail, link);
 
