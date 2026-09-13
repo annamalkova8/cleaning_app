@@ -26,8 +26,11 @@
    - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` — для отправки писем
      (проще всего завести бесплатный аккаунт на [resend.com](https://resend.com) — там сразу
      даются SMTP-данные; либо используй Gmail с "паролем приложения").
-5. Railway сам выполнит `npm install` и `npm run build` (build уже включает `prisma generate` и
-   `prisma migrate deploy`, так что таблицы создадутся автоматически).
+5. Railway сам выполнит `npm install` и `npm run build` (build включает `prisma generate`).
+   Миграции (`prisma migrate deploy`) запускаются отдельно как **pre-deploy command** — это
+   уже настроено в `railway.json`, — потому что во время сборки (build) приватная сеть
+   Railway (`postgres.railway.internal`) ещё недоступна, и подключиться к базе можно только
+   на этапе deploy.
 6. **Создай первые данные** (админ-пользователь + 5 стартовых комнат с примерами задач):
    в Railway открой вкладку "Shell" для сервиса (или запусти one-off command) и выполни:
    ```
