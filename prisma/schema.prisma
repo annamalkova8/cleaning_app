@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  completions Completion[]
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  name      String
+  imageUrl  String
+  order     Int      @default(0)
+  tasks     Task[]
+  createdAt DateTime @default(now())
+}
+
+// Frequency for recurring cleaning tasks
+enum Frequency {
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+model Task {
+  id           String     @id @default(cuid())
+  room         Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId       String
+  title        String
+  instruction  String
+  frequency    Frequency  @default(WEEKLY)
+  x            Float      // marker position, 0-100 (% of image width)
+  y            Float      // marker position, 0-100 (% of image height)
+  lastDoneAt   DateTime?
+  lastDoneBy   String?
+  completions  Completion[]
+  createdAt    DateTime   @default(now())
+}
+
+model Completion {
+  id          String   @id @default(cuid())
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId      String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  completedAt DateTime @default(now())
+}
+
+model LoginToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+}

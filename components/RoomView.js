@@ -1,0 +1,92 @@
+"use client";
+import { useState } from "react";
+
+const FREQ_LABEL = {
+  WEEKLY: "Каждую неделю",
+  MONTHLY: "Каждый месяц",
+  YEARLY: "Раз в год",
+};
+
+export default function RoomView({ room }) {
+  const [tasks, setTasks] = useState(room.tasks);
+  const [activeTask, setActiveTask] = useState(null);
+  const [busy, setBusy] = useState(false);
+
+  async function markDone(taskId) {
+    setBusy(true);
+    try {
+      const res = await fetch("/api/tasks/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ taskId }),
+      });
+      const data = await res.json();
+      if (data.task) {
+        setTasks((prev) => prev.map((t) => (t.id === taskId ? data.task : t)));
+        setActiveTask(data.task);
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="page">
+      <a className="back-link" href="/">
+        ← Все комнаты
+      </a>
+      <h1 className="title" style={{ marginBottom: 16 }}>
+        {room.name}
+      </h1>
+
+      <div className="room-view">
+        <img src={room.imageUrl} alt={room.name} />
+        {tasks.map((task) => (
+          <button
+            key={task.id}
+            className={`marker ${task.lastDoneAt ? "done" : ""}`}
+            style={{ left: `${task.x}%`, top: `${task.y}%` }}
+            onClick={() => setActiveTask(task)}
+            aria-label={task.title}
+            title={task.title}
+          >
+            {task.lastDoneAt ? "✓" : "!"}
+          </button>
+        ))}
+      </div>
+
+      {tasks.length === 0 && (
+        <p style={{ color: "var(--ink-soft)", marginTop: 16 }}>
+          В этой комнате пока нет задач.
+        </p>
+      )}
+
+      {activeTask && (
+        <div className="sheet-overlay" onClick={() => setActiveTask(null)}>
+          <div className="sheet" onClick={(e) => e.stopPropagation()}>
+            <h3>{activeTask.title}</h3>
+            <div className="freq-tag">{FREQ_LABEL[activeTask.frequency]}</div>
+            <div className="instruction">{activeTask.instruction}</div>
+            {activeTask.lastDoneAt && (
+              <div className="done-meta">
+                Сделано: {activeTask.lastDoneBy || "—"},{" "}
+                {new Date(activeTask.lastDoneAt).toLocaleDateString("ru-RU")}
+              </div>
+            )}
+            <button
+              className="btn"
+              disabled={busy}
+              onClick={() => markDone(activeTask.id)}
+            >
+              {activeTask.lastDoneAt ? "Сделано ещё раз ✓" : "Готово! ✓"}
+            </button>
+            <div style={{ height: 10 }} />
+            <button className="btn secondary" onClick={() => setActiveTask(null)}>
+              Закрыть
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
