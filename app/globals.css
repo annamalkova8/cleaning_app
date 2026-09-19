@@ -175,12 +175,13 @@ h1.title {
 }
 
 .marker {
-  width: 40px;
-  height: 40px;
+  position: relative;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid var(--coral);
   box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-  background: var(--coral);
+  background: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -190,8 +191,38 @@ h1.title {
   flex-shrink: 0;
 }
 
+.marker:not(:has(.marker-icon)) {
+  background: var(--coral);
+}
+
 .marker.done {
+  border-color: var(--leaf);
+}
+
+.marker.done:not(:has(.marker-icon)) {
   background: var(--leaf);
+}
+
+.marker-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.marker-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: white;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
 }
 
 .marker-label {
@@ -247,9 +278,17 @@ h1.title {
   box-shadow: 0 -8px 30px rgba(0,0,0,0.2);
 }
 
+.sheet-image {
+  width: 84px;
+  height: 84px;
+  display: block;
+  margin: 0 auto 12px;
+}
+
 .sheet h3 {
   font-size: 19px;
   margin-bottom: 4px;
+  text-align: center;
 }
 
 .freq-tag {

@@ -39,6 +39,7 @@ model Task {
   roomId       String
   title        String
   instruction  String
+  imageUrl     String?
   frequency    Frequency  @default(WEEKLY)
   x            Float      // marker position, 0-100 (% of image width)
   y            Float      // marker position, 0-100 (% of image height)

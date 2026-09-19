@@ -1,0 +1,226 @@
+{
+  "Кухня": {
+    "objects": [
+      {
+        "title": "Плита",
+        "description": "Cartoon-style flat illustration of a kitchen stove with four round burners, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Мыть специальным средством."
+      },
+      {
+        "title": "Духовка",
+        "description": "Cartoon-style flat illustration of a built-in oven with a glass door, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Мыть/прожарить."
+      },
+      {
+        "title": "Раковина",
+        "description": "Cartoon-style flat illustration of a kitchen sink with a curved faucet, simple shapes, bright clean colors, thick outlines",
+        "parts": [
+          {
+            "title": "Мытьё раковины",
+            "description": "Cartoon close-up of a sink basin with soap bubbles and a sponge, flat illustration style",
+            "instruction": "Помыть всё либо средством для раковин, либо водой с кондиционером и щёткой."
+          },
+          {
+            "title": "Кран",
+            "description": "Cartoon close-up of a kitchen faucet, flat illustration style",
+            "instruction": "Кран — спец. средство от соли."
+          },
+          {
+            "title": "Сливное отверстие",
+            "description": "Cartoon close-up of a sink drain with a small brush, flat illustration style",
+            "instruction": "Сливное отверстие и смыв — щёткой."
+          }
+        ]
+      },
+      {
+        "title": "Столы, ящики, стена",
+        "description": "Cartoon-style flat illustration of a kitchen countertop with drawers and a tiled wall behind it, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Тряпкой с вода+кондей."
+      },
+      {
+        "title": "Мусорки",
+        "description": "Cartoon-style flat illustration of two trash/recycling bins with lids, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Мыть."
+      },
+      {
+        "title": "Решётка от вытяжки",
+        "description": "Cartoon-style flat illustration of a metal mesh range-hood filter grate lying flat, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Посудомойка (помыть в посудомоечной машине)."
+      },
+      {
+        "title": "Посудомойка",
+        "description": "Cartoon-style flat illustration of a built-in dishwasher with a stainless front panel, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Лимонная кислота."
+      },
+      {
+        "title": "Пол",
+        "description": "Cartoon-style flat illustration of a kitchen tile floor viewed from above, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесос или мыть."
+      },
+      {
+        "title": "Коврик",
+        "description": "Cartoon-style flat illustration of a small kitchen floor mat, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Стирать."
+      }
+    ]
+  },
+  "Спальня": {
+    "objects": [
+      {
+        "title": "Полка над кроватью, тумбочка, подоконник",
+        "description": "Cartoon-style flat illustration of a bed with a shelf above the headboard, a nightstand beside it, and a windowsill nearby, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Тряпкой с вода+кондей."
+      },
+      {
+        "title": "Занавески",
+        "description": "Cartoon-style flat illustration of a window with long curtains on both sides, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Стирать."
+      },
+      {
+        "title": "Пол",
+        "description": "Cartoon-style flat illustration of a bedroom floor viewed from above, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесос или мыть."
+      }
+    ]
+  },
+  "Ванная": {
+    "objects": [
+      {
+        "title": "Душ",
+        "description": "Cartoon-style flat illustration of a glass-walled shower stall with a showerhead, simple shapes, bright clean colors, thick outlines",
+        "parts": [
+          {
+            "title": "Стёкла",
+            "description": "Cartoon close-up of a glass shower wall being wiped, flat illustration style",
+            "instruction": "Спец. средство."
+          },
+          {
+            "title": "Краны",
+            "description": "Cartoon close-up of shower faucet controls, flat illustration style",
+            "instruction": "Спец. средство."
+          },
+          {
+            "title": "Пыль внизу",
+            "description": "Cartoon close-up of the bottom edge/tray of a shower stall, flat illustration style",
+            "instruction": "Можно влажной туалеткой."
+          },
+          {
+            "title": "Слив",
+            "description": "Cartoon close-up of a shower floor drain, flat illustration style",
+            "instruction": "Залить антизасор, помыть изнутри (обычной туалеткой или ватным диском)."
+          }
+        ]
+      },
+      {
+        "title": "Туалет",
+        "description": "Cartoon-style flat illustration of a white toilet with a tank, simple shapes, bright clean colors, thick outlines",
+        "parts": [
+          {
+            "title": "Поверхности",
+            "description": "Cartoon close-up of the toilet's outer surfaces being wiped, flat illustration style",
+            "instruction": "Все поверхности влажной туалеткой."
+          },
+          {
+            "title": "Чаша",
+            "description": "Cartoon close-up of a toilet brush cleaning the bowl, flat illustration style",
+            "instruction": "Залить средством для мытья туалета на 10 минут, потом всё помыть ёршиком."
+          }
+        ]
+      },
+      {
+        "title": "Раковина",
+        "description": "Cartoon-style flat illustration of a bathroom sink with a mirror above it, simple shapes, bright clean colors, thick outlines",
+        "parts": [
+          {
+            "title": "Мытьё раковины",
+            "description": "Cartoon close-up of a bathroom sink basin with a brush, flat illustration style",
+            "instruction": "Помыть всё либо средством для раковин, либо водой с кондиционером и щёткой."
+          },
+          {
+            "title": "Кран",
+            "description": "Cartoon close-up of a bathroom faucet, flat illustration style",
+            "instruction": "Спец. средство от соли."
+          },
+          {
+            "title": "Зеркало",
+            "description": "Cartoon close-up of a bathroom mirror being wiped, flat illustration style",
+            "instruction": "Иногда — спец. средство для зеркал."
+          },
+          {
+            "title": "Полочки",
+            "description": "Cartoon close-up of small bathroom shelves, flat illustration style",
+            "instruction": "От пыли."
+          },
+          {
+            "title": "Отверстие под краном",
+            "description": "Cartoon close-up of the overflow hole under a bathroom faucet, flat illustration style",
+            "instruction": "Иногда (может быть бяка)."
+          },
+          {
+            "title": "Сливное отверстие",
+            "description": "Cartoon close-up of a bathroom sink drain with a brush, flat illustration style",
+            "instruction": "Сливное отверстие и смыв — щёткой."
+          }
+        ]
+      },
+      {
+        "title": "Стиральная машина",
+        "description": "Cartoon-style flat illustration of a white front-loading washing machine with a round door, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Тряпкой с вода+кондей."
+      },
+      {
+        "title": "Стиральная машина — лимонная кислота",
+        "description": "Same washing machine as above — cartoon-style flat illustration, white, round glass door, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Лимонная кислота."
+      },
+      {
+        "title": "Коврик",
+        "description": "Cartoon-style flat illustration of a small bathroom floor mat, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Стирать."
+      },
+      {
+        "title": "Пол",
+        "description": "Cartoon-style flat illustration of a bathroom tile floor viewed from above, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесос или мыть."
+      }
+    ]
+  },
+  "Гостиная": {
+    "objects": [
+      {
+        "title": "Тумба с телевизором, столик, лампа, подоконники",
+        "description": "Cartoon-style flat illustration of a TV stand under a television, a coffee table and floor lamp nearby, a windowsill in view, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Тряпкой с вода+кондей."
+      },
+      {
+        "title": "Диван, подушки, плед",
+        "description": "Cartoon-style flat illustration of a sofa with pillows and a folded throw blanket, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесосить."
+      },
+      {
+        "title": "Пол",
+        "description": "Cartoon-style flat illustration of a living room floor viewed from above, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесос или мыть."
+      },
+      {
+        "title": "Телевизор",
+        "description": "Cartoon-style flat illustration of a flat-screen television, screen off, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Влажная салфетка."
+      }
+    ]
+  },
+  "Прихожая": {
+    "objects": [
+      {
+        "title": "Пол",
+        "description": "Cartoon-style flat illustration of an entryway floor viewed from above, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Пылесос или мыть."
+      },
+      {
+        "title": "Тумба, шкаф",
+        "description": "Cartoon-style flat illustration of an entryway console table next to a wardrobe/closet, simple shapes, bright clean colors, thick outlines",
+        "instruction": "Тряпкой с вода+кондей."
+      }
+    ]
+  }
+}

@@ -52,7 +52,14 @@ export default function RoomView({ room }) {
               onClick={() => setActiveTask(task)}
               aria-label={task.title}
             >
-              {task.lastDoneAt ? "✓" : "!"}
+              {task.imageUrl ? (
+                <img className="marker-icon" src={task.imageUrl} alt="" />
+              ) : (
+                task.lastDoneAt ? "✓" : "!"
+              )}
+              {task.imageUrl && task.lastDoneAt && (
+                <span className="marker-badge">✓</span>
+              )}
             </button>
             <span className="marker-label">{task.title}</span>
           </div>
@@ -68,6 +75,9 @@ export default function RoomView({ room }) {
       {activeTask && (
         <div className="sheet-overlay" onClick={() => setActiveTask(null)}>
           <div className="sheet" onClick={(e) => e.stopPropagation()}>
+            {activeTask.imageUrl && (
+              <img className="sheet-image" src={activeTask.imageUrl} alt="" />
+            )}
             <h3>{activeTask.title}</h3>
             <div className="freq-tag">{FREQ_LABEL[activeTask.frequency]}</div>
             <div className="instruction">{activeTask.instruction}</div>
