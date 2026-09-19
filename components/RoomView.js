@@ -42,16 +42,20 @@ export default function RoomView({ room }) {
       <div className="room-view">
         <img src={room.imageUrl} alt={room.name} />
         {tasks.map((task) => (
-          <button
+          <div
             key={task.id}
-            className={`marker ${task.lastDoneAt ? "done" : ""}`}
+            className="marker-wrap"
             style={{ left: `${task.x}%`, top: `${task.y}%` }}
-            onClick={() => setActiveTask(task)}
-            aria-label={task.title}
-            title={task.title}
           >
-            {task.lastDoneAt ? "✓" : "!"}
-          </button>
+            <button
+              className={`marker ${task.lastDoneAt ? "done" : ""}`}
+              onClick={() => setActiveTask(task)}
+              aria-label={task.title}
+            >
+              {task.lastDoneAt ? "✓" : "!"}
+            </button>
+            <span className="marker-label">{task.title}</span>
+          </div>
         ))}
       </div>
 
