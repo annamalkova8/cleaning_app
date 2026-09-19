@@ -40,6 +40,7 @@ export default async function HomePage() {
           const total = room.tasks.length;
           const done = room.tasks.filter((t) => t.lastDoneAt).length;
           const allDone = total > 0 && done === total;
+          const percent = total > 0 ? Math.round((done / total) * 100) : 0;
           return (
             <a key={room.id} href={`/rooms/${room.id}`} className="room-card">
               <img className="thumb" src={room.imageUrl} alt={room.name} />
@@ -49,6 +50,11 @@ export default async function HomePage() {
                   {done}/{total}
                 </span>
               </div>
+              {total > 0 && (
+                <div className="progress-track">
+                  <div className="progress-fill" style={{ width: `${percent}%` }} />
+                </div>
+              )}
             </a>
           );
         })}
