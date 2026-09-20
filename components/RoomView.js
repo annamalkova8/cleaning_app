@@ -60,6 +60,11 @@ export default function RoomView({ room }) {
               {task.imageUrl && task.lastDoneAt && (
                 <span className="marker-badge">✓</span>
               )}
+              {task.assignedTo && (
+                <span className="marker-assignee" title={`Назначено: ${task.assignedTo.name || task.assignedTo.email}`}>
+                  {(task.assignedTo.name || task.assignedTo.email)[0].toUpperCase()}
+                </span>
+              )}
             </button>
             <span className="marker-label">{task.title}</span>
           </div>
@@ -79,7 +84,14 @@ export default function RoomView({ room }) {
               <img className="sheet-image" src={activeTask.imageUrl} alt="" />
             )}
             <h3>{activeTask.title}</h3>
-            <div className="freq-tag">{FREQ_LABEL[activeTask.frequency]}</div>
+            <div className="tag-row">
+              <div className="freq-tag">{FREQ_LABEL[activeTask.frequency]}</div>
+              {activeTask.assignedTo && (
+                <div className="assignee-tag">
+                  Назначено: {activeTask.assignedTo.name || activeTask.assignedTo.email}
+                </div>
+              )}
+            </div>
             <div className="instruction">{activeTask.instruction}</div>
             {activeTask.lastDoneAt && (
               <div className="done-meta">

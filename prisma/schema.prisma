@@ -15,6 +15,7 @@ model User {
   isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now())
   completions Completion[]
+  assignedTasks Task[] @relation("TaskAssignee")
 }
 
 model Room {
@@ -43,6 +44,8 @@ model Task {
   frequency    Frequency  @default(WEEKLY)
   x            Float      // marker position, 0-100 (% of image width)
   y            Float      // marker position, 0-100 (% of image height)
+  assignedToId String?
+  assignedTo   User?      @relation("TaskAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
   lastDoneAt   DateTime?
   lastDoneBy   String?
   completions  Completion[]

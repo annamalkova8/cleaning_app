@@ -52,14 +52,14 @@ export default function AdminPanel({ initialRooms, initialUsers }) {
 
       {notice && <div className={`notice ${notice.ok ? "" : "error"}`} style={{ marginBottom: 16 }}>{notice.message}</div>}
 
-      {tab === "rooms" && <RoomsTab rooms={rooms} setRooms={setRooms} flash={flash} />}
+      {tab === "rooms" && <RoomsTab rooms={rooms} setRooms={setRooms} users={users} flash={flash} />}
       {tab === "reset" && <ResetTab rooms={rooms} flash={flash} />}
       {tab === "people" && <PeopleTab users={users} setUsers={setUsers} flash={flash} />}
     </div>
   );
 }
 
-function RoomsTab({ rooms, setRooms, flash }) {
+function RoomsTab({ rooms, setRooms, users, flash }) {
   const [newRoomName, setNewRoomName] = useState("");
   const [newRoomImage, setNewRoomImage] = useState("");
 
@@ -106,18 +106,19 @@ function RoomsTab({ rooms, setRooms, flash }) {
       </div>
 
       {rooms.map((room) => (
-        <RoomEditor key={room.id} room={room} onDeleteRoom={deleteRoom} onTasksChange={(tasks) => updateRoomTasks(room.id, tasks)} flash={flash} />
+        <RoomEditor key={room.id} room={room} users={users} onDeleteRoom={deleteRoom} onTasksChange={(tasks) => updateRoomTasks(room.id, tasks)} flash={flash} />
       ))}
     </>
   );
 }
 
-function RoomEditor({ room, onDeleteRoom, onTasksChange, flash }) {
+function RoomEditor({ room, users, onDeleteRoom, onTasksChange, flash }) {
   const [tasks, setTasks] = useState(room.tasks);
   const [pendingPos, setPendingPos] = useState(null); // {x,y} from image click
   const [newTitle, setNewTitle] = useState("");
   const [newInstruction, setNewInstruction] = useState("");
   const [newFreq, setNewFreq] = useState("WEEKLY");
+  const [newAssignee, setNewAssignee] = useState("");
 
   function setAndPropagate(next) {
     setTasks(next);
@@ -143,12 +144,14 @@ function RoomEditor({ room, onDeleteRoom, onTasksChange, flash }) {
         title: newTitle,
         instruction: newInstruction,
         frequency: newFreq,
+        assignedToId: newAssignee || null,
         x: pendingPos.x,
         y: pendingPos.y,
       });
       setAndPropagate([...tasks, task]);
       setNewTitle("");
       setNewInstruction("");
+      setNewAssignee("");
       setPendingPos(null);
       flash("Задача добавлена");
     } catch (err) {
@@ -174,6 +177,7 @@ function RoomEditor({ room, onDeleteRoom, onTasksChange, flash }) {
         title: task.title,
         instruction: task.instruction,
         frequency: task.frequency,
+        assignedToId: task.assignedToId || null,
       });
       setAndPropagate(tasks.map((t) => (t.id === updated.id ? updated : t)));
       flash("Сохранено");
@@ -215,6 +219,10 @@ function RoomEditor({ room, onDeleteRoom, onTasksChange, flash }) {
           <select value={newFreq} onChange={(e) => setNewFreq(e.target.value)}>
             {FREQ_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
           </select>
+          <select value={newAssignee} onChange={(e) => setNewAssignee(e.target.value)}>
+            <option value="">Не назначено</option>
+            {users.map((u) => <option key={u.id} value={u.id}>{u.name || u.email}</option>)}
+          </select>
         </div>
         <button className="btn" type="submit">Добавить задачу{pendingPos ? ` (${pendingPos.x}%, ${pendingPos.y}%)` : ""}</button>
       </form>
@@ -226,6 +234,10 @@ function RoomEditor({ room, onDeleteRoom, onTasksChange, flash }) {
           <div className="row">
             <select value={task.frequency} onChange={(e) => editLocal(task.id, "frequency", e.target.value)}>
               {FREQ_OPTIONS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
+            </select>
+            <select value={task.assignedToId || ""} onChange={(e) => editLocal(task.id, "assignedToId", e.target.value)}>
+              <option value="">Не назначено</option>
+              {users.map((u) => <option key={u.id} value={u.id}>{u.name || u.email}</option>)}
             </select>
           </div>
           <div className="row">

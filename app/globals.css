@@ -306,6 +306,14 @@ h1.title {
   text-align: center;
 }
 
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
 .freq-tag {
   display: inline-block;
   font-size: 12px;
@@ -313,7 +321,32 @@ h1.title {
   background: #eaf2ef;
   padding: 3px 9px;
   border-radius: 999px;
-  margin-bottom: 12px;
+}
+
+.assignee-tag {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--coral);
+  background: #fbeae5;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.marker-assignee {
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
 }
 
 .instruction {

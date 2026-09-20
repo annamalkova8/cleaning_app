@@ -11,7 +11,12 @@ export default async function RoomPage({ params }) {
 
   const room = await prisma.room.findUnique({
     where: { id: params.roomId },
-    include: { tasks: { orderBy: { createdAt: "asc" } } },
+    include: {
+      tasks: {
+        orderBy: { createdAt: "asc" },
+        include: { assignedTo: { select: { id: true, name: true, email: true } } },
+      },
+    },
   });
 
   if (!room) notFound();

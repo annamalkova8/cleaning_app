@@ -22,6 +22,7 @@ async function POST(req) {
       lastDoneAt: now,
       lastDoneBy: session.name || session.email,
     },
+    include: { assignedTo: { select: { id: true, name: true, email: true } } },
   });
 
   await prisma.completion.create({

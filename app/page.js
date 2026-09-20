@@ -14,6 +14,17 @@ export default async function HomePage() {
     include: { tasks: true },
   });
 
+  const myTasksRaw = await prisma.task.findMany({
+    where: { assignedToId: session.uid },
+    include: { room: { select: { id: true, name: true } } },
+  });
+  const myTasks = myTasksRaw.sort((a, b) => {
+    if (!!a.lastDoneAt === !!b.lastDoneAt) return 0;
+    return a.lastDoneAt ? 1 : -1;
+  });
+
+  const FREQ_LABEL = { WEEKLY: "Каждую неделю", MONTHLY: "Каждый месяц", YEARLY: "Раз в год" };
+
   return (
     <div className="page">
       <div className="topbar">
@@ -28,6 +39,32 @@ export default async function HomePage() {
           <LogoutButton />
         </div>
       </div>
+
+      {myTasks.length > 0 && (
+        <div style={{ marginBottom: 24 }}>
+          <h2 style={{ fontSize: 16, marginBottom: 10 }}>Мои задачи</h2>
+          <div className="task-list-fallback">
+            {myTasks.map((task) => (
+              <a key={task.id} href={`/rooms/${task.room.id}`} className="task-row" style={{ textDecoration: "none", color: "inherit" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  {task.imageUrl && (
+                    <img src={task.imageUrl} alt="" style={{ width: 28, height: 28 }} />
+                  )}
+                  <span>
+                    <div style={{ fontWeight: 600, fontSize: 14 }}>{task.title}</div>
+                    <div style={{ fontSize: 12, color: "var(--ink-soft)" }}>
+                      {task.room.name} · {FREQ_LABEL[task.frequency]}
+                    </div>
+                  </span>
+                </span>
+                <span className={`badge ${task.lastDoneAt ? "" : "pending"}`}>
+                  {task.lastDoneAt ? "✓" : "!"}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {rooms.length === 0 && (
         <p style={{ color: "var(--ink-soft)" }}>
